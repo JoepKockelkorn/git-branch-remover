@@ -4,18 +4,19 @@ module.exports = async function main() {
   const { logSuccess, log } = require('./logging');
 
   const git = simpleGit().silent(true);
-  const { current, all: branches } = await git.branchLocal();
-  const filteredBranches = branches.filter((b) => b !== current);
+  const { current, all: allBranches } = await git.branchLocal();
+  const filteredBranches = allBranches.filter((b) => b !== current);
   if (filteredBranches.length === 0) {
     log('Your current branch is the only branch.');
     return;
   }
-  // const { branch } = await inquirer.prompt({
-  //   name: 'branch',
-  //   message: 'Which branch would you like to checkout?',
-  //   choices: [...filteredBranches],
-  //   type: 'list',
-  // });
-  // await git.checkout(branch);
-  // logSuccess(`Successfully checked out ${branch}`);
+  const { branches } = await inquirer.prompt({
+    name: 'branches',
+    message: 'Which branches would you like to delete?',
+    choices: [...filteredBranches],
+    type: 'checkbox',
+  });
+
+  await Promise.all(branches.map((branch) => git.deleteLocalBranch(branch)));
+  logSuccess(`Successfully deleted branches: ${branches.join(', ')}`);
 };
