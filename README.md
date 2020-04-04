@@ -1,4 +1,4 @@
-# git-branch-cleaner 🧹
+# git-branch-remover 🧹
 
 This tool allows you to delete local git branches from a list, instead of running `git branch` and then retyping the specific branch identifier with `git branch -d`.
 
@@ -6,7 +6,7 @@ This tool allows you to delete local git branches from a list, instead of runnin
 
 In your terminal, run:
 
-`git-branch-cleaner`
+`git-branch-remover`
 
 Then pick your branches from the list with the arrow keys and press Space to select and Enter to continue.
 
