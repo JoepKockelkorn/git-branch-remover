@@ -1,3 +1,7 @@
+const { promisify } = require('util');
+const { exec } = require('child_process');
+const execAsync = promisify(exec);
+
 module.exports = async function main() {
   const inquirer = require('inquirer');
   const simpleGit = require('simple-git/promise');
@@ -17,6 +21,14 @@ module.exports = async function main() {
     type: 'checkbox',
   });
 
-  await Promise.all(branches.map((branch) => git.deleteLocalBranch(branch)));
-  logSuccess(`Successfully deleted branches: ${branches.join(', ')}`);
+  const output = await Promise.all(branches.map((branch) => forceDeleteGitBranch(branch)));
+  if (branches.length === 0) {
+    logSuccess(`Deleting no branches`);
+    return;
+  }
+  logSuccess(`Successfully deleted branch${branches.length > 0 ? 'es' : ''}: ${branches.join(', ')}`);
 };
+
+function forceDeleteGitBranch(branchName) {
+  return execAsync(`git branch -D ${branchName}`);
+}
