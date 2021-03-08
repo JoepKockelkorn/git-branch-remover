@@ -7,7 +7,7 @@ module.exports = async function main() {
   const simpleGit = require('simple-git/promise');
   const { logSuccess, log } = require('./logging');
 
-  const git = simpleGit().silent(true);
+  const git = simpleGit();
   const { current, all: allBranches } = await git.branchLocal();
   const filteredBranches = allBranches.filter((b) => b !== current);
   if (filteredBranches.length === 0) {
@@ -26,7 +26,7 @@ module.exports = async function main() {
     logSuccess(`Deleting no branches`);
     return;
   }
-  logSuccess(`Successfully deleted branch${branches.length > 0 ? 'es' : ''}: ${branches.join(', ')}`);
+  logSuccess(`Successfully deleted branch${branches.length > 1 ? 'es' : ''}:\n${branches.map((b) => `- ${b}`).join('\n')}`);
 };
 
 function forceDeleteGitBranch(branchName) {

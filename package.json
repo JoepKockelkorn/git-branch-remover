@@ -1,6 +1,6 @@
 {
   "name": "git-branch-remover",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A command line utility to quickly delete local git branches.",
   "main": "index.js",
   "repository": "https://github.com/JoepKockelkorn/git-branch-remover.git",
