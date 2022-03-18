@@ -1,13 +1,15 @@
-const chalk = require("chalk");
+import chalk from 'chalk';
 
-module.exports = {
-  logSuccess: function (message) {
-    console.log(chalk.green(message));
-  },
-  log: function (message) {
-    console.log(message);
-  },
-  logError: function (message) {
-    console.error(chalk.red(message));
-  },
-};
+function logSuccess(message) {
+  console.log(chalk.green(message));
+}
+
+function log(message) {
+  console.log(message);
+}
+
+function logError(message) {
+  console.error(chalk.red(message));
+}
+
+export { logSuccess, log, logError };

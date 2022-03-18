@@ -1,18 +1,19 @@
 {
   "name": "git-branch-remover",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A command line utility to quickly delete local git branches.",
   "main": "index.js",
   "repository": "https://github.com/JoepKockelkorn/git-branch-remover.git",
   "author": "Joep Kockelkorn",
   "license": "MIT",
   "private": false,
+  "type": "module",
   "bin": {
     "git-branch-remover": "index.js"
   },
   "dependencies": {
-    "chalk": "^4.1.1",
-    "inquirer": "^8.0.0",
-    "simple-git": "^2.39.0"
+    "chalk": "^5.0.1",
+    "inquirer": "^8.2.1",
+    "simple-git": "^3.3.0"
   }
 }

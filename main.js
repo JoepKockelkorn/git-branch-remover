@@ -1,12 +1,12 @@
-const { promisify } = require('util');
-const { exec } = require('child_process');
+import { promisify } from 'util';
+import { exec } from 'child_process';
 const execAsync = promisify(exec);
+import simpleGit from 'simple-git';
+import inquirer from 'inquirer';
 
-module.exports = async function main() {
-  const inquirer = require('inquirer');
-  const simpleGit = require('simple-git/promise');
-  const { logSuccess, log } = require('./logging');
+import { logSuccess, log } from './logging.js';
 
+export default async function main() {
   const git = simpleGit();
   const { current, all: allBranches } = await git.branchLocal();
   const filteredBranches = allBranches.filter((b) => b !== current);
@@ -27,7 +27,7 @@ module.exports = async function main() {
     return;
   }
   logSuccess(`Successfully deleted branch${branches.length > 1 ? 'es' : ''}:\n${branches.map((b) => `- ${b}`).join('\n')}`);
-};
+}
 
 function forceDeleteGitBranch(branchName) {
   return execAsync(`git branch -D ${branchName}`);
